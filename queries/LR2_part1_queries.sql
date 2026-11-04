@@ -73,3 +73,32 @@ FROM student
 ORDER BY group_number;
 
 
+
+-- Задание 13. Проверка существования связанных записей EXISTS
+SELECT
+    t.teacher_id,
+    t.surname,
+    t.first_name,
+    t.position
+FROM teacher AS t
+WHERE EXISTS (
+    SELECT 1
+    FROM discipline_course AS dc
+    WHERE dc.teacher_id = t.teacher_id
+)
+ORDER BY t.teacher_id;
+
+
+-- Задание 14. Условный вывод с CASE
+SELECT
+    result_id,
+    student_id,
+    grade,
+    CASE
+        WHEN grade IN ('4', '5', 'зачтено') THEN 'Успешно'
+        WHEN grade IN ('2', '3', 'не зачтено') THEN 'Требует улучшения'
+        ELSE 'Нет оценки'
+    END AS result_status
+FROM control_result
+ORDER BY result_id;
+
