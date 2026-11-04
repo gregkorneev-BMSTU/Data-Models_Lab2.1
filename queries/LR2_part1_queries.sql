@@ -1,4 +1,23 @@
 
+-- Задание 1. Выборка всех записей из таблицы
+SELECT *
+FROM student;
+
+-- Задание 2. Выборка отдельных столбцов
+SELECT surname, first_name, group_number
+FROM student;
+
+-- Задание 3. Сортировка дисциплин по названию
+SELECT discipline_id, discipline_name
+FROM discipline
+ORDER BY discipline_name ASC;
+
+-- Задание 4. Ограничение количества строк
+SELECT student_id, surname, first_name
+FROM student
+ORDER BY student_id
+LIMIT 1 OFFSET 0;
+
 -- Задание 5. Фильтрация с WHERE и BETWEEN
 SELECT course_id, discipline_id, semester, academic_year
 FROM discipline_course
