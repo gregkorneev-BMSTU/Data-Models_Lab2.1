@@ -102,3 +102,34 @@ SELECT
 FROM control_result
 ORDER BY result_id;
 
+
+-- Вариант 13. Задание 1.
+-- Студенты, имеющие хотя бы один результат контроля
+SELECT
+    s.student_id,
+    s.surname,
+    s.first_name,
+    s.group_number
+FROM student AS s
+WHERE EXISTS (
+    SELECT 1
+    FROM control_result AS cr
+    WHERE cr.student_id = s.student_id
+)
+ORDER BY s.student_id;
+
+
+
+-- Вариант 13. Задание 2.
+-- Учебные группы, в которых отсутствуют студенты
+SELECT
+    g.group_number,
+    g.admission_year
+FROM study_group AS g
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM student AS s
+    WHERE s.group_number = g.group_number
+)
+ORDER BY g.group_number;
+
