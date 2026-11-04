@@ -1,40 +1,24 @@
-SELECT *
-FROM student;
+
+-- Задание 5. Фильтрация с WHERE и BETWEEN
+SELECT course_id, discipline_id, semester, academic_year
+FROM discipline_course
+WHERE semester BETWEEN 3 AND 5
+  AND academic_year = '2026/2027'
+ORDER BY semester ASC;
 
 
--- Задание 2. Выборка отдельных столбцов
-SELECT surname, first_name, group_number
-FROM student;
 
-
--- Задание 3. Сортировка дисциплин по названию
-SELECT discipline_id, discipline_name
-FROM discipline
-ORDER BY discipline_name ASC;
-
-
--- Задание 4. Ограничение количества строк
-SELECT student_id, surname, first_name
+-- Задание 6. IN с подзапросом
+SELECT student_id, surname, first_name, group_number
 FROM student
-ORDER BY student_id
-LIMIT 1 OFFSET 0;
+WHERE student_id IN (
+    SELECT student_id
+    FROM control_result
+    WHERE grade = '5'
+);
 
 
--- Проверка количества записей во всех таблицах
-SELECT 'study_group' AS table_name, COUNT(*) AS row_count FROM study_group
-UNION ALL
-SELECT 'student', COUNT(*) FROM student
-UNION ALL
-SELECT 'teacher', COUNT(*) FROM teacher
-UNION ALL
-SELECT 'discipline', COUNT(*) FROM discipline
-UNION ALL
-SELECT 'discipline_course', COUNT(*) FROM discipline_course
-UNION ALL
-SELECT 'discipline_teacher', COUNT(*) FROM discipline_teacher
-UNION ALL
-SELECT 'lesson', COUNT(*) FROM lesson
-UNION ALL
-SELECT 'control_result', COUNT(*) FROM control_result;
-
-
+-- Задание 7. Поиск по шаблону LIKE
+SELECT student_id, surname, first_name, group_number
+FROM student
+WHERE surname LIKE 'П%';
