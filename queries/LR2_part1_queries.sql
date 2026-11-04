@@ -22,3 +22,54 @@ WHERE student_id IN (
 SELECT student_id, surname, first_name, group_number
 FROM student
 WHERE surname LIKE 'П%';
+
+
+
+-- Задание 8. Поиск отсутствующих значений IS NULL
+SELECT student_id, surname, first_name, patronymic
+FROM student
+WHERE patronymic IS NULL;
+
+
+
+-- Задание 9. Агрегатные функции
+SELECT
+    COUNT(*) AS total_courses,
+    SUM(semester) AS sum_semesters,
+    AVG(semester) AS avg_semester,
+    MIN(semester) AS min_semester,
+    MAX(semester) AS max_semester
+FROM discipline_course;
+
+
+
+-- Задание 10. Группировка и фильтрация групп
+SELECT
+    semester,
+    COUNT(*) AS course_count
+FROM discipline_course
+GROUP BY semester
+HAVING COUNT(*) > 2
+ORDER BY course_count DESC;
+
+
+-- Задание 11. Соединение таблиц INNER JOIN
+SELECT
+    s.student_id,
+    s.surname,
+    s.first_name,
+    g.group_number,
+    g.admission_year
+FROM student AS s
+INNER JOIN study_group AS g
+    ON s.group_number = g.group_number
+ORDER BY g.group_number, s.surname;
+
+
+
+-- Задание 12. Выборка уникальных значений DISTINCT
+SELECT DISTINCT group_number
+FROM student
+ORDER BY group_number;
+
+
